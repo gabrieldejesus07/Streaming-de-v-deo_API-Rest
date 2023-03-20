@@ -38,7 +38,7 @@ public class VideoController {
 
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody @Valid DadosVideo dados){
-        repository.save(new Video(dados));
+    public Video cadastrar(@RequestBody @Valid DadosVideo dados){
+        return repository.save(new Video(dados));
     }
 }

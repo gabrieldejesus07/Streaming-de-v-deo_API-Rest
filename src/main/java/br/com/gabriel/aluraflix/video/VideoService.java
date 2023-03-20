@@ -17,4 +17,6 @@ public class VideoService {
         return obj.orElseThrow(() -> new RuntimeException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Video.class.getName()));
     }
+
+
 }
