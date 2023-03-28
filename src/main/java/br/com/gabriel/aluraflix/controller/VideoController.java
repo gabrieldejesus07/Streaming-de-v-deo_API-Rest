@@ -1,9 +1,6 @@
 package br.com.gabriel.aluraflix.controller;
 
-import br.com.gabriel.aluraflix.video.DadosVideo;
-import br.com.gabriel.aluraflix.video.Video;
-import br.com.gabriel.aluraflix.video.VideoRepository;
-import br.com.gabriel.aluraflix.video.VideoService;
+import br.com.gabriel.aluraflix.video.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +13,7 @@ import java.awt.print.Pageable;
 import java.util.List;
 
 @RestController
-@RequestMapping("videos")
+@RequestMapping("/videos")
 public class VideoController {
 
     @Autowired
@@ -40,5 +37,13 @@ public class VideoController {
     @Transactional
     public Video cadastrar(@RequestBody @Valid DadosVideo dados){
         return repository.save(new Video(dados));
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoVideo dados){
+        var video = repository.getReferenceById(dados.id());
+        video.atualizarInformacoes(dados);
+        return ResponseEntity.ok(new DadosDetalhadosVideo(video));
     }
 }
