@@ -16,12 +16,15 @@ public class Video {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String titulo;
     private String descricao;
     private String url;
 
+    private boolean ativo;
     public Video(DadosVideo dados){
+        this.ativo = true;
         this.titulo = dados.titulo();
         this.descricao = dados.descricao();
         this.url = dados.url();
@@ -39,4 +42,9 @@ public class Video {
             }
 
         }
-    }}
+    }
+
+    public void excluir() {
+        this.ativo = false;
+    }
+}

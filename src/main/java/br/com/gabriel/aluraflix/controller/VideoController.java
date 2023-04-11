@@ -46,4 +46,12 @@ public class VideoController {
         video.atualizarInformacoes(dados);
         return ResponseEntity.ok(new DadosDetalhadosVideo(video));
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity excluir(@PathVariable Long id){
+        var video = repository.getReferenceById(id);
+        video.excluir();
+        return ResponseEntity.noContent().build();
+    }
 }
